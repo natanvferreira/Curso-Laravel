@@ -17,26 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::any("/any", function () {
-    return "Permite todo tipo de acesso";
-});
 
-Route::match(["put", "delete"], "/any", function () {
-    return "Permite todo tipo de acesso";
-});
+Route::group(["prefix" => "admin", "as", "admin."], function () {
+    Route::get("dashborad", function () {
+        return "dashboard";
+    })->name("dashboard");
 
-Route::get('/produto/{id}/{cat?}', function ($id, $cat = "") {
-    return "o id de produtos é: $id <br> a categoria é: $cat";
-});
+    Route::get("users", function () {
+        return "users";
+    })->name("users");
 
-Route::redirect("/sobre", "/empresa");
-
-Route::view("/empresa", "site/empresa");
-
-Route::get('/new', function () {
-    return view('news');
-})->name("noticias");
-
-Route::get('/novidades', function () {
-    return redirect()->route("noticias");
+    Route::get("clientes", function () {
+        return "clientes";
+    })->name("clientes");
 });
