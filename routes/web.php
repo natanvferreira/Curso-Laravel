@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProdutoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,21 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::group(["prefix" => "admin", "as", "admin."], function () {
-    Route::get("dashborad", function () {
-        return "dashboard";
-    })->name("dashboard");
-
-    Route::get("users", function () {
-        return "users";
-    })->name("users");
-
-    Route::get("clientes", function () {
-        return "clientes";
-    })->name("clientes");
-});
+Route::resource("produtos", ProdutoController::class);
